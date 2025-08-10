@@ -2,13 +2,13 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 
-const Header = ({ isAdmin = false }) => {
+const Header = () => {
   return (
     <header className="app-header">
       <div className="header-container">
         <NavLink to="/" className="logo">
           <span className="logo-icon">🔗</span>
-          <span className="logo-text">Short.ly</span>
+          <span className="logo-text">Short.url</span>
         </NavLink>
 
         <nav className="nav-links">

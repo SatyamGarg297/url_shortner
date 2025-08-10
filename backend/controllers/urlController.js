@@ -10,16 +10,20 @@ export const createShortUrl = async (req, res, next) => {
   }
 
   try {
+
+    // Backend ka current URL detect karega (local ya deployed)
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+
     let existing = await Url.findOne({ longUrl });
     if (existing) {
-      return res.json({ shortUrl: `${process.env.BASE_URL}/${existing.shortCode}` });
+      return res.json({ shortUrl: `${baseUrl}/${existing.shortCode}` });
     }
 
     const shortCode = shortid.generate();
     const newUrl = await Url.create({ longUrl, shortCode });
 
     res.status(201).json({
-      shortUrl: `${process.env.BASE_URL}/${newUrl.shortCode}`
+      shortUrl: `${baseUrl}/${newUrl.shortCode}`
     });
   } catch (err) {
     next(err);
